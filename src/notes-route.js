@@ -97,7 +97,6 @@ notesRouter
           })
 
         .patch(cors(),(req, res, next) => {
-            console.log(req.body)
             const { note_name, note_content, folder_id } = req.body
             const noteToUpdate = { note_name, note_content, folder_id }
  
