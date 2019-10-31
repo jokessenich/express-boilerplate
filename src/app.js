@@ -21,12 +21,11 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
-app.options("/*", function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.send(200);
-});
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+}
+
 
 app.use('/folders', foldersRouter)
 app.use('/notes', notesRouter)
@@ -47,14 +46,6 @@ app.get('/', (req, res)=> {
     res.send('Hello, world!')
 })
 
- app.use(function errorHandler(error, req, res, next) {
-    let response
-    if (NODE_ENV === 'production') {       response = { error: { message: 'server error' } }
-    } else {
-     console.error(error)
-     response = { message: error.message, error }
-    }
-    res.status(500).json(response)
-    })
+
 
 module.exports = app
