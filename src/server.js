@@ -9,6 +9,7 @@ const db = knex({
 
 app.set('db', db)
 
+
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
