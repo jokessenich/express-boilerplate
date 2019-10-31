@@ -22,10 +22,6 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(express.static('dist'));
-app.get('*', (request, response) => {
-response.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
 
 
 app.use('/folders', foldersRouter)
