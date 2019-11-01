@@ -3,7 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
-const { NODE_ENV } = require('./config')
+const { NODE_ENV } = require('../config')
 const notesRouter = require('./notes-route')
 const foldersRouter = require('./folders-route')
 const FoldersService = require('./folders-service')
@@ -22,13 +22,7 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'path/to/your/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+
 
 app.use('/folders', foldersRouter)
 app.use('/notes', notesRouter)
